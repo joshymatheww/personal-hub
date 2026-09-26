@@ -1,1 +1,5 @@
-<h1>Welcome to dashboard</h1>
+<svelte:head>
+	<title>Dashboard: Personal Hub</title>
+</svelte:head>
+
+<h1>Welcome to Personal Hub</h1>
