@@ -1,3 +1,30 @@
+@import 'https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&display=swap';
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-page: #eceef2;
+    --color-panel: #ffffff;
+    --color-rail: #1b1e25;
+    --color-ink: #191c22;
+    --colot-muted: #616874;
+    --color-line: #d6dae1;
+    --color-hot: #b2371c;
+    --color-warm: #b07a10;
+    --color-go: #17695a;
+    --color-cold: #2f5da3;
+
+    --font-display: 'Archivo','ui-sans-serif','system-ui','sans-serif';
+    --font-sans: 'Inter','ui-sans-serif','system-ui','sans-serif'
+}
+
+:root { color-scheme: light; }
+
+body { background:#eceef2; }
+
+:focus-visible { outline:2px solid #191c22; outline-offset:2px; }
+
+@media (prefers-reduced-motion: reduce){ *{transition-duration:.01ms!important;animation-duration:.01ms!important} }

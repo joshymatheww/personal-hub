@@ -3,6 +3,7 @@ from logging.config import fileConfig
 from alembic import context
 from app.config import settings
 from app.models import Base, User
+from app.workouts.models import ExerciseLibrary, ExerciseLog, WorkoutSession
 from sqlalchemy import engine_from_config, pool
 
 # this is the Alembic Config object, which provides
