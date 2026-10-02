@@ -9,18 +9,18 @@ export abstract class BaseForm<T extends Record<string, any>, TResponse> {
 	 * Abstract submission logic implemented by the children classes
 	 * Enforces that the child class method returns the exact TResponse
 	 */
-	abstract executeSubmit(): Promise<TResponse>;
+	abstract executeSubmit(token?: string): Promise<TResponse>;
 
 	/**
 	 * Main submission handler attached to the <form onsbumit={...}
 	 */
-	async submit(e: SubmitEvent): Promise<TResponse | null> {
+	async submit(e: SubmitEvent, token?: string): Promise<TResponse | null> {
 		e.preventDefault();
 		this.errors = {};
 		this.isSubmitting = true;
 
 		try {
-			const data = await this.executeSubmit();
+			const data = await this.executeSubmit(token);
 			return data;
 		} catch (error) {
 			this.handleError(error);

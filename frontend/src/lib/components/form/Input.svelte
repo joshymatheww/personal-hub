@@ -5,7 +5,7 @@
 		id: string;
 		name: string;
 		label: string;
-		value: string;
+		value: string | number;
 		error?: string;
 	} & HTMLInputAttributes;
 
@@ -18,7 +18,7 @@
 		{id}
 		{name}
 		bind:value
-		class="placeholder:text-muted/60 w-full rounded-md border bg-panel px-3.5 py-2.5 text-sm transition-colors
+		class="placeholder:text-muted/60 w-full rounded-md border bg-page px-3.5 py-2.5 text-sm transition-colors
            {error ? 'border-hot focus:ring-hot' : 'border-line focus:ring-0'}"
 		{...restProps}
 	/>

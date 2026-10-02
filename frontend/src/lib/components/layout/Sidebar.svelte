@@ -1,9 +1,14 @@
+<script>
+	import { page } from '$app/state';
+</script>
+
 <aside
 	class="fixed inset-y-0 left-0 z-30 hidden w-16 flex-col items-center gap-1 bg-rail py-4 lg:flex"
 >
 	<a
-		href="/app/"
-		class="mb-4 grid h-10 w-10 place-items-center rounded-md bg-white/10 text-white"
+		href="/app"
+		class="mb-4 grid h-10 w-10 place-items-center rounded-md text-white/55 hover:bg-white/10 hover:text-white"
+		class:is_active={page.url.pathname === '/app'}
 		aria-label="Workout log home"
 	>
 		<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,9 +23,10 @@
 	</a>
 
 	<a
-		href="/app/finance"
+		href="/app/finance-manager"
 		data-nav="dashboard"
 		class="rail-link relative grid h-11 w-11 place-items-center rounded-md text-white/55 hover:bg-white/10 hover:text-white"
+		class:is_active={page.url.pathname.indexOf('/app/finance-manager') >= 0}
 		aria-label="Dashboard"
 	>
 		<span class="rail-mark absolute left-0 h-6 w-0.5 -translate-x-2 rounded-full bg-white opacity-0"
@@ -36,9 +42,10 @@
 		</svg>
 	</a>
 	<a
-		href="/app/workouts"
+		href="/app/workouts-manager"
 		data-nav="sessions"
 		class="rail-link relative grid h-11 w-11 place-items-center rounded-md text-white/55 hover:bg-white/10 hover:text-white"
+		class:is_active={page.url.pathname.indexOf('/app/workouts-manager') >= 0}
 		aria-label="Sessions"
 	>
 		<span class="rail-mark absolute left-0 h-6 w-0.5 -translate-x-2 rounded-full bg-white opacity-0"

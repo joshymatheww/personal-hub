@@ -10,6 +10,7 @@ class ExerciseLibraryBase(BaseModel):
     targeted_muscle: str = Field(..., min_length=1, max_length=50)
     recovery_time_hours: int = Field(48, gt=0)
     valid_splits: list[WorkoutSplitType] = Field(..., min_length=1)
+    equipement: str | None = Field(default=None)
 
 
 class ExerciseLibraryCreate(ExerciseLibraryBase):
@@ -62,5 +63,6 @@ class WorkoutSessionOut(WorkoutSessionBase):
 
 
 class WorkoutsMetaData(BaseModel):
+    equipements: list[str]
     muscle_groups: list[str]
     split_types: list[dict]

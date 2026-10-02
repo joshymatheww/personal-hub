@@ -22,11 +22,12 @@ async def get_worksouts_meta_data(
     session: Annotated[AsyncSession, Depends(get_session)],
     current_user: Annotated[User, Depends(authenticate)],
 ):
-    muscle_groups = await LibraryService(session=session).get_muscle_groups(
+    metadata = await LibraryService(session=session).get_muscle_groups_and_equipements(
         user_id=current_user.id
     )
     return WorkoutsMetaData(
-        muscle_groups=muscle_groups,
+        equipements=metadata["equipements"],
+        muscle_groups=metadata["targeted_muscles"],
         split_types=[
             {"label": type.name, "value": type.value} for type in WorkoutSplitType
         ],

@@ -28,3 +28,7 @@ body { background:#eceef2; }
 :focus-visible { outline:2px solid #191c22; outline-offset:2px; }
 
 @media (prefers-reduced-motion: reduce){ *{transition-duration:.01ms!important;animation-duration:.01ms!important} }
+
+.is_active {
+    @apply bg-white/10 text-white;
+}

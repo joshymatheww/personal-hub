@@ -35,6 +35,9 @@ class ExerciseLibrary(Base):
         Integer, default=48, nullable=False
     )
     valid_splits: Mapped[list[str]] = mapped_column(ARRAY(String), nullable=False)
+    equipement: Mapped[str | None] = mapped_column(
+        String(50), default=None, nullable=True
+    )
 
     logged_instances: Mapped[list["ExerciseLog"]] = relationship(
         back_populates="exercise_meta"

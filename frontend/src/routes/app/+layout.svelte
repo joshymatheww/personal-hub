@@ -5,10 +5,13 @@
 	import Header from '$lib/components/layout/Header.svelte';
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
 	import { authStore } from '$lib/stores/auth-store.svelte';
+	import { setWorkoutState } from '$lib/stores/workouts-store.svelte';
 	import { onDestroy, onMount } from 'svelte';
 
 	let { children } = $props();
 	let logoutTimer: ReturnType<typeof setTimeout>;
+
+	setWorkoutState();
 
 	function startAutoLogoutTimer() {
 		if (logoutTimer) clearTimeout(logoutTimer);

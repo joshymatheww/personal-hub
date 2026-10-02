@@ -18,7 +18,7 @@ router = APIRouter()
 async def create_admin(session: Annotated[AsyncSession, Depends(get_session)]):
     user_details = UserCreate(
         first_name=settings.admin_first_name,
-        last_name=settings.admin_first_name,
+        last_name=settings.admin_last_name,
         email=settings.admin_email,
         password=settings.admin_password,
     )

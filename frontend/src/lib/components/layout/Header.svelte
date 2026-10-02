@@ -17,24 +17,24 @@
 		</button>
 
 		<nav class="hidden items-center gap-6 text-sm md:flex">
-			<a href="#/dashboard" data-nav="dashboard" class="top-link text-muted hover:text-ink">Home</a>
-			<a href="#/sessions" data-nav="sessions" class="top-link text-muted hover:text-ink"
-				>Sessions</a
+			<a href="/app" data-nav="dashboard" class="top-link text-muted hover:text-ink">Home</a>
+			<a
+				href="/app/finance-manager/transactions"
+				data-nav="exercises"
+				class="top-link text-muted hover:text-ink"
 			>
-			<a href="#/exercises" data-nav="exercises" class="top-link text-muted hover:text-ink"
-				>Exercises</a
+				Transactions
+			</a>
+			<a
+				href="/app/workouts-manager/sessions"
+				data-nav="sessions"
+				class="top-link text-muted hover:text-ink"
 			>
-			<a href="#/recovery" data-nav="recovery" class="top-link text-muted hover:text-ink"
-				>Recovery</a
-			>
+				Sessions
+			</a>
 		</nav>
 
 		<div class="ml-auto flex items-center gap-1">
-			<a
-				href="#/session-detail"
-				class="mr-1 hidden rounded-md bg-ink px-4 py-2 text-sm font-medium text-panel hover:bg-ink/90 sm:block"
-				>New session</a
-			>
 			<button
 				class="text-muted grid h-10 w-10 place-items-center rounded-md hover:bg-page"
 				aria-label="Search"

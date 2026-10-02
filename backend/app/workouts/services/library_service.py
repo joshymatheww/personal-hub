@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-from sqlalchemy import select
+from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..models import ExerciseLibrary, WorkoutSplitType
@@ -123,11 +123,36 @@ class LibraryService:
         )
         return result.scalars().all()
 
-    async def get_muscle_groups(self, user_id: int) -> list[str]:
+    async def get_muscle_groups_and_equipements(self, user_id: int) -> dict:
+        query = text("""
+            WITH unique_muscles AS (
+                SELECT DISTINCT targeted_muscle
+                FROM exercise_library
+                WHERE user_id = :user_id AND exercise_library IS NOT NULL
+            ),
+            unique_equipements AS (
+                SELECT DISTINCT equipement
+                FROM exercise_library
+                WHERE user_id = :user_id AND equipement IS NOT NULL
+            )
+            SELECT
+                (SELECT json_agg(targeted_muscle) FROM unique_muscles) AS targeted_muscles,
+                (SELECT json_agg(equipement) FROM unique_equipements) AS equipements;
+        """)
+        result = await self._session.execute(query, {"user_id": user_id})
+        row = result.fetchone()
+        return {
+            "targeted_muscles": row.targeted_muscles
+            if row and row.targeted_muscles
+            else [],
+            "equipements": row.equipements if row and row.equipements else [],
+        }
+
+    async def get_equipements(self, user_id: int) -> list[str]:
         result = await self._session.execute(
-            select(ExerciseLibrary.targeted_muscle)
+            select(ExerciseLibrary.equipement)
             .where(ExerciseLibrary.user_id == user_id)
             .distinct()
-            .order_by(ExerciseLibrary.targeted_muscle.asc())
+            .order_by(ExerciseLibrary.equipement.asc())
         )
         return list(result.scalars().all())
