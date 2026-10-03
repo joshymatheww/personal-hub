@@ -2,8 +2,13 @@ from logging.config import fileConfig
 
 from alembic import context
 from app.config import settings
-from app.models import Base, User
-from app.workouts.models import ExerciseLibrary, ExerciseLog, WorkoutSession
+from app.finance.models import Account, TransactionGroup, Transactions  # noqa: F401
+from app.models import Base, User  # noqa: F401
+from app.workouts.models import (  # noqa: F401
+    ExerciseLibrary,
+    ExerciseLog,
+    WorkoutSession,
+)
 from sqlalchemy import engine_from_config, pool
 
 # this is the Alembic Config object, which provides
