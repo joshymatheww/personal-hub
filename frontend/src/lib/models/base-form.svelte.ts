@@ -1,3 +1,6 @@
+import { goto } from '$app/navigation';
+import { authStore } from '$lib/stores/auth-store.svelte';
+
 /**
  * T is for Form Fields, TResponse is for API success object
  */
@@ -34,6 +37,10 @@ export abstract class BaseForm<T extends Record<string, any>, TResponse> {
 	 * Standardized FastAPI validation errors mapping
 	 */
 	private handleError(err: any) {
+		if (err.status === 401 && err.errors === 'Invalid or expired token') {
+			authStore.logout();
+			goto('/');
+		}
 		if (err.status === 422 && Array.isArray(err.errors)) {
 			const newErrors: typeof this.errors = {};
 			err.errors.forEach((detail: { loc: (string | number)[]; msg: string }) => {

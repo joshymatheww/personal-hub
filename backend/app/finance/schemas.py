@@ -55,3 +55,10 @@ class TransactionCreate(TransactionBase):
 class TransactionOut(TransactionBase):
     id: int
     model_config = ConfigDict(from_attributes=True)
+
+
+class FinanceMetaDataOut(BaseModel):
+    account_types: list[str]
+    payment_modes: list[str]
+    transaction_types: list[str]
+    categories: dict[str, list[str]]

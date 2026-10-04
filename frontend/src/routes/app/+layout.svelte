@@ -5,6 +5,7 @@
 	import Header from '$lib/components/layout/Header.svelte';
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
 	import { authStore } from '$lib/stores/auth-store.svelte';
+
 	import { setWorkoutState } from '$lib/stores/workouts-store.svelte';
 	import { onDestroy, onMount } from 'svelte';
 
@@ -57,7 +58,7 @@
 
 <Sidebar />
 
-<div class="lg:pl-16">
+<div class="flex flex-col lg:pl-16">
 	<Header />
 	<main class="px-4 py-8 pb-24 sm:px-6 lg:px-8 lg:pb-8">
 		{@render children()}
