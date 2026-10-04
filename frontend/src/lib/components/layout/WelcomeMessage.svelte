@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Dumbell from '../icons/Dumbell.svelte';
+	import AppIcon from '../icons/AppIcon.svelte';
 </script>
 
 <div
@@ -7,20 +7,20 @@
 >
 	<div class="flex items-center gap-2">
 		<span class="grid h-9 w-9 place-items-center rounded-md bg-white/10">
-			<Dumbell />
+			<AppIcon />
 		</span>
-		<span class="font-display text-lg font-semibold">Workout log</span>
+		<span class="font-display text-lg font-semibold">Personal Hub</span>
 	</div>
 
 	<div class="max-w-sm">
 		<p class="font-display text-3xl leading-tight font-bold xl:text-4xl">
-			Know exactly what to train today.
+			Health & Wealth, perfectly tracked.
 		</p>
 		<p class="mt-4 text-white/60">
-			Every session you log updates the recovery ladder, so the next workout picks itself — no more
-			guessing if it's leg day.
+			Every training session updates your recovery status, while every transaction secures your cash
+			flow. One unified dashboard to optimize your health and your wealth—zero guesswork required.
 		</p>
 	</div>
 
-	<p class="text-sm text-white/40">© 2026 Workout log</p>
+	<p class="text-sm text-white/40">© {new Date().getFullYear()} Personal hub</p>
 </div>

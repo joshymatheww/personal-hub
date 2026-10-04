@@ -2,6 +2,11 @@
 	import AccountsFilter from '$lib/components/finanace-manager/accounts/AccountsFilter.svelte';
 	import AccountsList from '$lib/components/finanace-manager/accounts/AccountsList.svelte';
 	import NewAccountForm from '$lib/components/finanace-manager/accounts/NewAccountForm.svelte';
+
+	let filterBy = $state({
+		name: '',
+		type: ''
+	});
 </script>
 
 <svelte:head>
@@ -16,8 +21,8 @@
 </div>
 <div class="grid gap-4 lg:grid-cols-[1fr_360px]">
 	<div class="@container">
-		<AccountsFilter />
-		<AccountsList />
+		<AccountsFilter bind:filterBy />
+		<AccountsList bind:filterBy />
 	</div>
 	<NewAccountForm />
 </div>

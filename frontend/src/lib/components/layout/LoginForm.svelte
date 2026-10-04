@@ -5,6 +5,7 @@
 	import SubmitButton from '../form/SubmitButton.svelte';
 	import EyeClosed from '../icons/EyeClosed.svelte';
 	import EyeOpen from '../icons/EyeOpen.svelte';
+	import Unlock from '../icons/Unlock.svelte';
 
 	const form = new LoginForm();
 	let togglePassword = $state(false);
@@ -67,5 +68,7 @@
 	<SubmitButton
 		title={form.isSubmitting ? 'Logging in ...' : 'Log in'}
 		disabled={form.isSubmitting || !form.isValid}
-	/>
+	>
+		<Unlock />
+	</SubmitButton>
 </form>

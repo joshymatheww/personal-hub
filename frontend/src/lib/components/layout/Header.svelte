@@ -1,4 +1,7 @@
 <script lang="ts">
+	import AlarmOne from '../icons/AlarmOne.svelte';
+	import Home from '../icons/Home.svelte';
+	import List from '../icons/List.svelte';
 	import UserProfile from './UserProfile.svelte';
 </script>
 
@@ -17,20 +20,23 @@
 		</button>
 
 		<nav class="hidden items-center gap-6 text-sm md:flex">
-			<a href="/app" data-nav="dashboard" class="top-link text-muted hover:text-ink">Home</a>
+			<a href="/app" class="top-link text-muted flex items-center gap-1.5 hover:text-ink">
+				<Home />
+				<span>Home</span>
+			</a>
 			<a
 				href="/app/finance-manager/transactions"
-				data-nav="exercises"
-				class="top-link text-muted hover:text-ink"
+				class="top-link text-muted flex items-center gap-1.5 hover:text-ink"
 			>
-				Transactions
+				<List />
+				<span>Transactions</span>
 			</a>
 			<a
 				href="/app/workouts-manager/sessions"
-				data-nav="sessions"
-				class="top-link text-muted hover:text-ink"
+				class="top-link text-muted flex items-center gap-1.5 hover:text-ink"
 			>
-				Sessions
+				<AlarmOne />
+				<span>Sessions</span>
 			</a>
 		</nav>
 

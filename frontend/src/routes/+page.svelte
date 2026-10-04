@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Dumbell from '$lib/components/icons/Dumbell.svelte';
+	import AppIcon from '$lib/components/icons/AppIcon.svelte';
 	import LoginForm from '$lib/components/layout/LoginForm.svelte';
 	import WelcomeMessage from '$lib/components/layout/WelcomeMessage.svelte';
 </script>
@@ -14,7 +15,7 @@
 		<div class="w-full max-w-sm">
 			<div class="mb-8 flex items-center gap-2 lg:hidden">
 				<span class="grid h-9 w-9 place-items-center rounded-md bg-rail text-white">
-					<Dumbell />
+					<AppIcon />
 				</span>
 				<span class="font-display text-lg font-semibold">Workout log</span>
 			</div>

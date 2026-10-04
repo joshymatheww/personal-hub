@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Input from '$lib/components/form/Input.svelte';
 	import SubmitButton from '$lib/components/form/SubmitButton.svelte';
+	import Save from '$lib/components/icons/Save.svelte';
 	import { AccountForm } from '$lib/models/account-form.svelte';
 	import { authStore } from '$lib/stores/auth-store.svelte';
 	import { getFinanceState } from '$lib/stores/finance-store.svelte';
@@ -74,6 +75,8 @@
 		<SubmitButton
 			title={form.isSubmitting ? 'Saving...' : 'Save Account'}
 			disabled={form.isSubmitting}
-		/>
+		>
+			<Save />
+		</SubmitButton>
 	</form>
 </aside>
