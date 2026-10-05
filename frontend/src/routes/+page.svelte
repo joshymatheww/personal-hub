@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Welcome to Workout log</title>
+	<title>Welcome to Personal Hub</title>
 </svelte:head>
 
 <div class="grid min-h-dvh lg:grid-cols-2">
@@ -17,7 +17,7 @@
 				<span class="grid h-9 w-9 place-items-center rounded-md bg-rail text-white">
 					<AppIcon />
 				</span>
-				<span class="font-display text-lg font-semibold">Workout log</span>
+				<span class="font-display text-lg font-semibold">Personal Hub</span>
 			</div>
 			<h1 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">Welcome back</h1>
 			<p class="text-muted mt-1.5">Log in to pick up where you left off.</p>

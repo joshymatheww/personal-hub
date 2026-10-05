@@ -7,13 +7,14 @@
 </script>
 
 <div class="mb-6 border-b border-line backdrop-blur">
-	<div class="flex h-16 items-center gap-2">
-		<ul class="hidden items-center gap-6 text-sm md:flex">
+	<div class="hidden h-16 items-center gap-2 sm:flex">
+		<ul class="hidden flex-row items-center gap-6 text-sm sm:flex">
 			<li>
 				<a
 					href="/app/finance-manager"
-					class="flex items-center gap-1.5"
+					class="flex items-center gap-1.5 rounded-md px-3 py-2 transition duration-300 ease-in-out hover:bg-white"
 					class:font-bold={page.url.pathname === '/app/finance-manager'}
+					class:is_active_sub={page.url.pathname === '/app/finance-manager'}
 				>
 					<Dashboard />
 					<span>Dashboard</span>
@@ -22,8 +23,9 @@
 			<li>
 				<a
 					href="/app/finance-manager/transactions"
-					class="flex items-center gap-1.5"
+					class="flex items-center gap-1.5 rounded-md px-3 py-2 transition duration-300 ease-in-out hover:bg-white"
 					class:font-bold={page.url.pathname === '/app/finance-manager/transactions'}
+					class:is_active_sub={page.url.pathname === '/app/finance-manager/transactions'}
 				>
 					<List />
 					<span>Transactions</span>
@@ -32,8 +34,9 @@
 			<li>
 				<a
 					href="/app/finance-manager/settings/accounts"
-					class="flex items-center gap-1.5"
+					class="flex items-center gap-1.5 rounded-md px-3 py-2 transition duration-300 ease-in-out hover:bg-white"
 					class:font-bold={page.url.pathname === '/app/finance-manager/settings/accounts'}
+					class:is_active_sub={page.url.pathname === '/app/finance-manager/settings/accounts'}
 				>
 					<Settings />
 					<span>Settings</span>

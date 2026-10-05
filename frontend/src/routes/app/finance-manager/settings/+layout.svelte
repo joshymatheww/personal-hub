@@ -13,16 +13,19 @@
 	>
 		<a
 			href="/app/finance-manager/settings/accounts"
-			class="flex items-center gap-1.5"
+			class="flex items-center gap-1.5 px-3 py-2 transition duration-300 ease-in-out hover:bg-white"
 			class:font-bold={page.url.pathname === '/app/finance-manager/settings/accounts'}
+			class:is_active_sub={page.url.pathname === '/app/finance-manager/settings/accounts'}
 		>
 			<Bank />
 			<span>Accounts</span>
 		</a>
 		<a
 			href="/app/finance-manager/settings/transactions-groups"
-			class="flex items-center gap-1.5"
+			class="flex items-center gap-1.5 px-3 py-2 transition duration-300 ease-in-out hover:bg-white"
 			class:font-bold={page.url.pathname === '/app/finance-manager/settings/transactions-groups'}
+			class:is_active_sub={page.url.pathname ===
+				'/app/finance-manager/settings/transactions-groups'}
 		>
 			<TransactionsGroup />
 			<span>Transactions Groups</span>

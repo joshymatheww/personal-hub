@@ -32,3 +32,6 @@ body { background:#eceef2; }
 .is_active {
     @apply bg-white/10 text-white;
 }
+.is_active_sub {
+    @apply rounded-md bg-white;
+}

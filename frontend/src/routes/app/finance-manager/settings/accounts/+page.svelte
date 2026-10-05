@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>Accounts | Settings | Fianance Manager | Personal Hub</title>
+	<title>Accounts | Settings | Finance Manager | Personal Hub</title>
 </svelte:head>
 
 <div class="mb-6 flex flex-wrap items-baseline justify-between gap-4">
