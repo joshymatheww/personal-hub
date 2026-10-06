@@ -9,11 +9,17 @@ from app.finance.models import AccountType, PaymentMode, TransactionType
 class AccountBase(BaseModel):
     name: str = Field(..., min_length=1, max_length=100)
     type: AccountType
-    balance: Decimal = Field(..., max_digits=12, decimal_places=2)
+    balance: Decimal = Field(..., max_digits=12, decimal_places=2, ge=0)
 
 
 class AccountCreate(AccountBase):
     pass
+
+
+class AccountUpdate(BaseModel):
+    name: str | None = Field(default=None, min_length=1, max_length=100)
+    type: AccountType | None = Field(default=None)
+    balance: Decimal | None = Field(default=None, max_digits=12, decimal_places=2, ge=0)
 
 
 class AccountOut(AccountBase):

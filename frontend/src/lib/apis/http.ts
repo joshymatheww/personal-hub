@@ -30,3 +30,18 @@ export async function postResource<T, S>(payload: T, token: string, url: string)
 	}
 	return result as S; // Cast to the explicit response interface
 }
+
+export async function deleteResource(token: string, url: string): Promise<boolean> {
+	const response = await fetch(`${PUBLIC_API_BASE_URL}/${url}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`
+		}
+	});
+	if (response.status !== 204) {
+		const result = await response.json();
+		throw { status: response.status, errors: result.detail };
+	}
+	return true;
+}

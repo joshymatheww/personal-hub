@@ -3,7 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..models import Account, AccountType
-from ..schemas import AccountCreate
+from ..schemas import AccountCreate, AccountUpdate
 
 
 class AccountService:
@@ -38,3 +38,48 @@ class AccountService:
         await self._session.commit()
         await self._session.refresh(new_account)
         return new_account
+
+    async def update_account(
+        self, account_details: AccountUpdate, account_id: int, user_id: int
+    ) -> Account:
+        result = await self._session.execute(
+            select(Account).where(Account.id == account_id)
+        )
+        account = result.scalars().first()
+        if not account:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Account not found to delete",
+            )
+        if account.user_id != user_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Not authorized to update this account",
+            )
+        update_data = account_details.model_dump(exclude_none=True)
+        for field, value in update_data.items():
+            setattr(account, field, value)
+
+        await self._session.commit()
+        await self._session.refresh(account)
+
+        return account
+
+    async def delete_account(self, account_id: int, user_id: int) -> None:
+        result = await self._session.execute(
+            select(Account).where(Account.id == account_id)
+        )
+        account = result.scalars().first()
+        if not account:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Account not found to delete",
+            )
+        if account.user_id != user_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Not authorized to delete this account",
+            )
+
+        await self._session.delete(account)
+        await self._session.commit()

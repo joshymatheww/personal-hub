@@ -35,3 +35,11 @@ body { background:#eceef2; }
 .is_active_sub {
     @apply rounded-md bg-white;
 }
+
+.success_toast {
+    @apply bg-go text-white
+}
+
+.error_toast {
+    @apply bg-hot text-white
+}

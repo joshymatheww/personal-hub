@@ -26,7 +26,7 @@
 {:else}
 	<Dropdown>
 		{#snippet trigger()}
-			<button
+			<div
 				class="ml-1 flex items-center gap-1 rounded-md py-1 pr-2 pl-1 hover:bg-page"
 				aria-label="Account"
 			>
@@ -38,7 +38,7 @@
 						: 'AU'}
 				</span>
 				<DownArrow />
-			</button>
+			</div>
 		{/snippet}
 		{#snippet children()}
 			<div class="py-1">

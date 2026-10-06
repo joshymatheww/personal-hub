@@ -5,26 +5,41 @@
 	import { AccountForm } from '$lib/models/account-form.svelte';
 	import { authStore } from '$lib/stores/auth-store.svelte';
 	import { getFinanceState } from '$lib/stores/finance-store.svelte';
+	import { getToastState } from '$lib/stores/toast-store.svelte';
 	import { useQueryClient } from '@tanstack/svelte-query';
+
+	interface Props {
+		showTitle?: boolean;
+		onSave?: () => void;
+	}
+
+	let { showTitle = true, onSave }: Props = $props();
 
 	const form = new AccountForm();
 	const financeState = getFinanceState();
 	const queryClient = useQueryClient();
+	const toastState = getToastState();
 
 	const handleSubmit = async (e: SubmitEvent) => {
 		const result = await form.submit(e, authStore.token || '');
 		if (result) {
+			if (!showTitle) {
+				onSave?.();
+			}
 			queryClient.invalidateQueries({
 				queryKey: ['finance-accounts']
 			});
 			form.resetForm();
+			toastState.add('Success', 'Succfully saved the account details', 'success');
 		}
 	};
 </script>
 
 <aside class="h-fit rounded-lg border border-line bg-panel p-5 sm:p-6">
 	<form onsubmit={handleSubmit}>
-		<h2 class="mb-3 font-semibold">Add an account</h2>
+		{#if showTitle}
+			<h2 class="mb-3 font-semibold">Add an account</h2>
+		{/if}
 		{#if form.errors.general}
 			<div class="rounded-md bg-hot/10 p-3 text-sm font-medium text-hot">
 				{form.errors.general}
