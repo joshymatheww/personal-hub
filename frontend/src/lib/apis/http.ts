@@ -45,3 +45,19 @@ export async function deleteResource(token: string, url: string): Promise<boolea
 	}
 	return true;
 }
+
+export async function updateResource<T, S>(payload: T, token: string, url: string): Promise<S> {
+	const response = await fetch(`${PUBLIC_API_BASE_URL}/${url}`, {
+		method: 'PATCH',
+		body: JSON.stringify(payload),
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`
+		}
+	});
+	const result = await response.json();
+	if (!response.ok) {
+		throw { status: response.status, errors: result.detail || 'Something went wrong' };
+	}
+	return result as S; // Cast to the explicit response interface
+}

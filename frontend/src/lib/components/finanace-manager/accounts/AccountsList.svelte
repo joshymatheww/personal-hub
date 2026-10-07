@@ -6,6 +6,8 @@
 	import { flip } from 'svelte/animate';
 	import { slide } from 'svelte/transition';
 	import AccountDeleteModal from './AccountDeleteModal.svelte';
+	import Modal from '$lib/components/ui/Modal.svelte';
+	import AccountEditForm from './AccountEditForm.svelte';
 
 	interface Props {
 		filterBy: {
@@ -19,6 +21,7 @@
 	const financeState = getFinanceState();
 	let accountsQuery = financeState.getAllAccounts();
 	let isAccountDeleteModalOpen = $state(false);
+	let isAccountEditModalOpen = $state(false);
 	let selectedAccount: Account | null = $state(null);
 
 	const allAccounts = $derived.by(() => {
@@ -41,6 +44,12 @@
 		isAccountDeleteModalOpen = !isAccountDeleteModalOpen;
 		selectedAccount = account;
 	}
+
+	function handleOnEdit(e: MouseEvent, account: Account) {
+		e.stopPropagation();
+		isAccountEditModalOpen = !isAccountEditModalOpen;
+		selectedAccount = account;
+	}
 </script>
 
 {#snippet accountOptions(account: Account)}
@@ -57,6 +66,7 @@
 			<div class="py-1">
 				<div class="mb-1 border-b border-line pb-1">
 					<button
+						onclick={(e) => handleOnEdit(e, account)}
 						class="block w-full cursor-pointer rounded-md px-4 py-2 text-left text-sm hover:bg-page"
 					>
 						Edit
@@ -106,3 +116,6 @@
 </div>
 
 <AccountDeleteModal bind:isOpen={isAccountDeleteModalOpen} account={selectedAccount!} />
+<Modal title="Edit Account" bind:isOpen={isAccountEditModalOpen}>
+	<AccountEditForm account={selectedAccount!} onSave={() => (isAccountEditModalOpen = false)} />
+</Modal>

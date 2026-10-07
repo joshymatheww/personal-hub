@@ -23,3 +23,9 @@ export interface AccountBase {
 export interface Account extends AccountBase {
 	id: number;
 }
+
+export interface AccountUpdate {
+	name?: string;
+	type?: string;
+	balance?: number;
+}

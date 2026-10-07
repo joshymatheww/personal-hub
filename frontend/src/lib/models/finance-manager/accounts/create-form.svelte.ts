@@ -1,6 +1,6 @@
 import { postResource } from '$lib/apis/http';
 import type { AccountBase, Account } from '$lib/types/finance';
-import { BaseForm } from './base-form.svelte';
+import { BaseForm } from '$lib/models/base-form.svelte';
 
 export class AccountForm extends BaseForm<AccountBase, Account> {
 	name = $state('');

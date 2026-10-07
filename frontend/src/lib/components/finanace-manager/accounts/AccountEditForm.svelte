@@ -2,20 +2,21 @@
 	import Input from '$lib/components/form/Input.svelte';
 	import SubmitButton from '$lib/components/form/SubmitButton.svelte';
 	import Save from '$lib/components/icons/Save.svelte';
-	import { AccountForm } from '$lib/models/finance-manager/accounts/create-form.svelte';
+	import { AccountUpdateForm } from '$lib/models/finance-manager/accounts/edit-form.svelte';
 	import { authStore } from '$lib/stores/auth-store.svelte';
 	import { getFinanceState } from '$lib/stores/finance-store.svelte';
 	import { getToastState } from '$lib/stores/toast-store.svelte';
+	import type { Account } from '$lib/types/finance';
 	import { useQueryClient } from '@tanstack/svelte-query';
 
 	interface Props {
-		showTitle?: boolean;
-		onSave?: () => void;
+		onSave: () => void;
+		account: Account;
 	}
 
-	let { showTitle = true, onSave }: Props = $props();
+	let { onSave, account }: Props = $props();
 
-	const form = new AccountForm();
+	const form = $derived(new AccountUpdateForm(account));
 	const financeState = getFinanceState();
 	const queryClient = useQueryClient();
 	const toastState = getToastState();
@@ -23,23 +24,17 @@
 	const handleSubmit = async (e: SubmitEvent) => {
 		const result = await form.submit(e, authStore.token || '');
 		if (result) {
-			if (!showTitle) {
-				onSave?.();
-			}
 			queryClient.invalidateQueries({
 				queryKey: ['finance-accounts']
 			});
-			form.resetForm();
-			toastState.add('Success', 'Succfully saved the account details', 'success');
+			toastState.add('Success', 'Succfully updated the account details', 'success');
+			onSave();
 		}
 	};
 </script>
 
 <aside class="h-fit rounded-lg border border-line bg-panel p-5 sm:p-6">
 	<form onsubmit={handleSubmit}>
-		{#if showTitle}
-			<h2 class="mb-3 font-semibold">Add an account</h2>
-		{/if}
 		{#if form.errors.general}
 			<div class="rounded-md bg-hot/10 p-3 text-sm font-medium text-hot">
 				{form.errors.general}
@@ -88,7 +83,7 @@
 		</div>
 
 		<SubmitButton
-			title={form.isSubmitting ? 'Saving...' : 'Save Account'}
+			title={form.isSubmitting ? 'Updating...' : 'Update Account'}
 			disabled={form.isSubmitting}
 		>
 			<Save />
