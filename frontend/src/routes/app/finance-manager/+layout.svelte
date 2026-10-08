@@ -4,7 +4,7 @@
 	import Menu from '$lib/components/icons/Menu.svelte';
 	import FinanceManagerHeader from '$lib/components/layout/FinanceManagerHeader.svelte';
 	import { authStore } from '$lib/stores/auth-store.svelte';
-	import { setFinanceState } from '$lib/stores/finance-store.svelte';
+	import { setAccountState } from '$lib/stores/finance-manager/accounts-store.svelte';
 	import { format } from 'date-fns';
 	import { onMount } from 'svelte';
 
@@ -12,7 +12,7 @@
 	let toggleMenu = $state(false);
 	let sectionRef: HTMLElement | undefined = $state();
 
-	setFinanceState();
+	setAccountState();
 
 	function handleWindowResize() {
 		if (sectionRef) {

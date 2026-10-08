@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getFinanceState } from '$lib/stores/finance-store.svelte';
+	import { getAccountState } from '$lib/stores/finance-manager/accounts-store.svelte';
 
 	interface Props {
 		filterBy: {
@@ -8,7 +8,7 @@
 		};
 	}
 
-	const financeState = getFinanceState();
+	const accountState = getAccountState();
 
 	let { filterBy = $bindable() }: Props = $props();
 </script>
@@ -36,7 +36,7 @@
 		bind:value={filterBy.type}
 	>
 		<option value="">All types</option>
-		{#each financeState.accountTypes as category}
+		{#each accountState.accountTypes as category}
 			<option value={category} class="capitalize">{category.replaceAll('_', ' ')}</option>
 		{/each}
 	</select>

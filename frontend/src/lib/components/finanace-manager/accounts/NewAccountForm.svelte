@@ -4,7 +4,7 @@
 	import Save from '$lib/components/icons/Save.svelte';
 	import { AccountForm } from '$lib/models/finance-manager/accounts/create-form.svelte';
 	import { authStore } from '$lib/stores/auth-store.svelte';
-	import { getFinanceState } from '$lib/stores/finance-store.svelte';
+	import { getAccountState } from '$lib/stores/finance-manager/accounts-store.svelte';
 	import { getToastState } from '$lib/stores/toast-store.svelte';
 	import { useQueryClient } from '@tanstack/svelte-query';
 
@@ -16,7 +16,7 @@
 	let { showTitle = true, onSave }: Props = $props();
 
 	const form = new AccountForm();
-	const financeState = getFinanceState();
+	const accountState = getAccountState();
 	const queryClient = useQueryClient();
 	const toastState = getToastState();
 
@@ -69,7 +69,7 @@
 		<div class="mt-4 mb-6">
 			<span class="text-muted text-sm">Type</span>
 			<div class="mt-2 flex flex-wrap gap-2">
-				{#each financeState.accountTypes as category}
+				{#each accountState.accountTypes as category}
 					<button
 						type="button"
 						class="hover:border-muted cursor-pointer rounded-full border border-line px-3 py-1.5 text-xs capitalize"

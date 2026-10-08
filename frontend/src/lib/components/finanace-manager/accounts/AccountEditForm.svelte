@@ -4,7 +4,7 @@
 	import Save from '$lib/components/icons/Save.svelte';
 	import { AccountUpdateForm } from '$lib/models/finance-manager/accounts/edit-form.svelte';
 	import { authStore } from '$lib/stores/auth-store.svelte';
-	import { getFinanceState } from '$lib/stores/finance-store.svelte';
+	import { getAccountState } from '$lib/stores/finance-manager/accounts-store.svelte';
 	import { getToastState } from '$lib/stores/toast-store.svelte';
 	import type { Account } from '$lib/types/finance';
 	import { useQueryClient } from '@tanstack/svelte-query';
@@ -17,7 +17,7 @@
 	let { onSave, account }: Props = $props();
 
 	const form = $derived(new AccountUpdateForm(account));
-	const financeState = getFinanceState();
+	const accountState = getAccountState();
 	const queryClient = useQueryClient();
 	const toastState = getToastState();
 
@@ -64,7 +64,7 @@
 		<div class="mt-4 mb-6">
 			<span class="text-muted text-sm">Type</span>
 			<div class="mt-2 flex flex-wrap gap-2">
-				{#each financeState.accountTypes as category}
+				{#each accountState.accountTypes as category}
 					<button
 						type="button"
 						class="hover:border-muted cursor-pointer rounded-full border border-line px-3 py-1.5 text-xs capitalize"

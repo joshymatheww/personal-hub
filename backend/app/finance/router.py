@@ -6,7 +6,7 @@ from app.middlewares.auth import authenticate
 from app.models import User
 
 from .models import AccountType, PaymentMode, TransactionType
-from .routers import account
+from .routers import account, transaction_group
 from .schemas import FinanceMetaDataOut
 
 router = APIRouter()
@@ -44,6 +44,11 @@ CORE_CATEGORIES = {
 
 
 router.include_router(account.router, prefix="/accounts", tags=["Accounts", "Finance"])
+router.include_router(
+    transaction_group.router,
+    prefix="/transaction-group",
+    tags=["Transactions Group", "Finance"],
+)
 
 
 @router.get("/metadata", response_model=FinanceMetaDataOut, tags=["Finance"])

@@ -3,9 +3,9 @@ import { getContext, setContext } from 'svelte';
 import type { Account, FinanceMeataData } from '$lib/types/finance';
 import { createQuery } from '@tanstack/svelte-query';
 import { fetchResource } from '$lib/apis/http';
-import { authStore } from './auth-store.svelte';
+import { authStore } from '../auth-store.svelte';
 
-export class FinanceStore {
+export class AccountStore {
 	// Getting metadata
 	meataDataQuery = createQuery<FinanceMeataData>(() => ({
 		queryKey: ['finance-metadata'],
@@ -34,12 +34,12 @@ export class FinanceStore {
 	});
 }
 
-const FINANCE_STATE_KEY = Symbol('FINANCE_STATE');
+const ACCOUNT_STATE_KEY = Symbol('ACCOUNTS_STATE');
 
-export function setFinanceState() {
-	return setContext(FINANCE_STATE_KEY, new FinanceStore());
+export function setAccountState() {
+	return setContext(ACCOUNT_STATE_KEY, new AccountStore());
 }
 
-export function getFinanceState() {
-	return getContext<ReturnType<typeof setFinanceState>>(FINANCE_STATE_KEY);
+export function getAccountState() {
+	return getContext<ReturnType<typeof setAccountState>>(ACCOUNT_STATE_KEY);
 }

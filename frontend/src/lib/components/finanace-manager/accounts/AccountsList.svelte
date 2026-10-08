@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Moreoptions from '$lib/components/icons/Moreoptions.svelte';
 	import Dropdown from '$lib/components/ui/Dropdown.svelte';
-	import { getFinanceState } from '$lib/stores/finance-store.svelte';
+	import { getAccountState } from '$lib/stores/finance-manager/accounts-store.svelte';
 	import type { Account } from '$lib/types/finance';
 	import { flip } from 'svelte/animate';
 	import { slide } from 'svelte/transition';
@@ -18,8 +18,8 @@
 
 	let { filterBy = $bindable() }: Props = $props();
 
-	const financeState = getFinanceState();
-	let accountsQuery = financeState.getAllAccounts();
+	const accountState = getAccountState();
+	let accountsQuery = accountState.getAllAccounts();
 	let isAccountDeleteModalOpen = $state(false);
 	let isAccountEditModalOpen = $state(false);
 	let selectedAccount: Account | null = $state(null);
