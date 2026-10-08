@@ -5,6 +5,7 @@
 	import FinanceManagerHeader from '$lib/components/layout/FinanceManagerHeader.svelte';
 	import { authStore } from '$lib/stores/auth-store.svelte';
 	import { setAccountState } from '$lib/stores/finance-manager/accounts-store.svelte';
+	import { setTransactionGroupState } from '$lib/stores/finance-manager/transaction-group-store.svelte';
 	import { format } from 'date-fns';
 	import { onMount } from 'svelte';
 
@@ -13,6 +14,7 @@
 	let sectionRef: HTMLElement | undefined = $state();
 
 	setAccountState();
+	setTransactionGroupState();
 
 	function handleWindowResize() {
 		if (sectionRef) {

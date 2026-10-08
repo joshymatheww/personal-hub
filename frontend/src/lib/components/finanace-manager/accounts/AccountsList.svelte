@@ -8,6 +8,7 @@
 	import AccountDeleteModal from './AccountDeleteModal.svelte';
 	import Modal from '$lib/components/ui/Modal.svelte';
 	import AccountEditForm from './AccountEditForm.svelte';
+	import Alert from '$lib/components/icons/Alert.svelte';
 
 	interface Props {
 		filterBy: {
@@ -111,6 +112,11 @@
 					</span>
 				</div>
 			</article>
+		{:else}
+			<div class="flex items-center gap-1.5 text-hot">
+				<Alert />
+				<p>No records found</p>
+			</div>
 		{/each}
 	{/if}
 </div>

@@ -29,3 +29,17 @@ export interface AccountUpdate {
 	type?: string;
 	balance?: number;
 }
+
+export interface TransactionGroupBase {
+	name: string;
+	description?: string;
+}
+
+export interface TransactionGroup extends TransactionGroupBase {
+	id: number;
+}
+
+export interface TransactionGroupUpdate {
+	name?: string;
+	description?: string;
+}
