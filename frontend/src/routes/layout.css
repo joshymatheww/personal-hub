@@ -43,3 +43,15 @@ body { background:#eceef2; }
 .error_toast {
     @apply bg-hot text-white
 }
+
+.income_transaction {
+    @apply bg-go border-go text-white
+}
+
+.expense_transaction {
+    @apply bg-hot border-hot text-white
+}
+
+.transfer_transaction {
+    @apply bg-cold border-cold text-white
+}

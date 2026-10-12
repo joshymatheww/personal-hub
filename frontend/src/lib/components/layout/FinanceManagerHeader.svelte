@@ -25,7 +25,8 @@
 					href="/app/finance-manager/transactions"
 					class="flex items-center gap-1.5 rounded-md px-3 py-2 transition duration-300 ease-in-out hover:bg-white"
 					class:font-bold={page.url.pathname === '/app/finance-manager/transactions'}
-					class:is_active_sub={page.url.pathname === '/app/finance-manager/transactions'}
+					class:is_active_sub={page.url.pathname === '/app/finance-manager/transactions' ||
+						page.url.pathname === '/app/finance-manager/transactions/new'}
 				>
 					<List />
 					<span>Transactions</span>
@@ -44,14 +45,16 @@
 				</a>
 			</li>
 		</ul>
-		<div class="ml-auto flex items-center gap-1">
-			<a
-				href="/app/finance-manager/transactions/new"
-				class="mr-1 hidden items-center gap-1.5 rounded-md bg-ink px-4 py-2 text-sm font-medium text-panel hover:bg-ink/90 sm:flex"
-			>
-				<Plus />
-				<span>New Transaction</span>
-			</a>
-		</div>
+		{#if page.url.pathname !== '/app/finance-manager/transactions/new'}
+			<div class="ml-auto flex items-center gap-1">
+				<a
+					href="/app/finance-manager/transactions/new"
+					class="mr-1 hidden items-center gap-1.5 rounded-md bg-ink px-4 py-2 text-sm font-medium text-panel hover:bg-ink/90 sm:flex"
+				>
+					<Plus />
+					<span>New Transaction</span>
+				</a>
+			</div>
+		{/if}
 	</div>
 </div>

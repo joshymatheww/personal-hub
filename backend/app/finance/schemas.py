@@ -1,7 +1,8 @@
 from datetime import UTC, datetime
 from decimal import Decimal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic_core import PydanticCustomError
 
 from app.finance.models import AccountType, PaymentMode, TransactionType
 
@@ -48,15 +49,60 @@ class TransactionGroupOut(TransactionGroupBase):
 
 class TransactionBase(BaseModel):
     account_id: int
+    to_account: int | None = Field(default=None)
     group_id: int | None = Field(default=None)
-    title: str = Field(min_length=1, max_length=100)
+    title: str = Field(
+        min_length=1,
+        max_length=100,
+    )
     transaction_time: datetime = Field(default_factory=lambda: datetime.now(UTC))
     amount: Decimal = Field(..., max_digits=10, decimal_places=2, gt=0)
     type: TransactionType
-    category: str = Field(..., min_length=1, max_length=50)
+    category: str
     payment_mode: PaymentMode
     description: str | None = Field(default=None, max_length=255)
     vendor: str | None = Field(default=None, max_length=100)
+
+    @field_validator("account_id")
+    @classmethod
+    def validate_account_id(cls, value: int) -> int:
+        if value <= 0:
+            raise PydanticCustomError("greater_than", "Please select an Account")
+        return value
+
+    @field_validator("amount", mode="before")
+    @classmethod
+    def validate_amount(cls, value: int) -> int:
+        if value <= 0:
+            raise PydanticCustomError(
+                "greater_than", "The transaction amount must be greather than 0"
+            )
+        return value
+
+    @field_validator("title", mode="before")
+    @classmethod
+    def validate_title(cls, value: str) -> str:
+        if len(value) <= 3:
+            raise PydanticCustomError(
+                "string_too_short", "Please enter valid transaction title"
+            )
+        return value
+
+    @field_validator("category", mode="before")
+    @classmethod
+    def validate_category(cls, value: str) -> str:
+        if len(value) <= 3:
+            raise PydanticCustomError("string_too_short", "Please select a category")
+        return value
+
+    @field_validator("payment_mode", mode="before")
+    @classmethod
+    def validate_payment_mode(cls, value: str) -> str:
+        if len(value) <= 2:
+            raise PydanticCustomError(
+                "string_too_short", "Please select the payment mode"
+            )
+        return value
 
 
 class TransactionCreate(TransactionBase):

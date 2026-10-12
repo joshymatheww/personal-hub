@@ -6,7 +6,7 @@ from app.middlewares.auth import authenticate
 from app.models import User
 
 from .models import AccountType, PaymentMode, TransactionType
-from .routers import account, transaction_group
+from .routers import account, transaction, transaction_group
 from .schemas import FinanceMetaDataOut
 
 router = APIRouter()
@@ -17,6 +17,7 @@ CORE_CATEGORIES = {
         "Freelance / Side Income",
         "Investment Returns",
         "Gifts & Others",
+        "Transfer by others",
     ],
     TransactionType.EXPENSE.value: [
         "Food & Dining",
@@ -48,6 +49,9 @@ router.include_router(
     transaction_group.router,
     prefix="/transaction-group",
     tags=["Transactions Group", "Finance"],
+)
+router.include_router(
+    transaction.router, prefix="/transactions", tags=["Transactions", "Finance"]
 )
 
 

@@ -32,6 +32,21 @@ export class AccountStore {
 		const query = this.meataDataQuery;
 		return query.data ? query.data.account_types : [];
 	});
+
+	transactionTypes = $derived.by(() => {
+		const query = this.meataDataQuery;
+		return query.data ? query.data.transaction_types : [];
+	});
+
+	transactionCategories = $derived.by(() => {
+		const query = this.meataDataQuery;
+		return query.data ? query.data.categories : [];
+	});
+
+	paymentMethods = $derived.by(() => {
+		const query = this.meataDataQuery;
+		return query.data ? query.data.payment_modes : [];
+	});
 }
 
 const ACCOUNT_STATE_KEY = Symbol('ACCOUNTS_STATE');

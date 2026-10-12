@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { authStore } from '$lib/stores/auth-store.svelte';
+	import { useQueryClient } from '@tanstack/svelte-query';
 	import DownArrow from '../icons/DownArrow.svelte';
 	import Dropdown from '../ui/Dropdown.svelte';
 
@@ -10,7 +11,12 @@
 		return (firstInitial + lastInitial).toUpperCase();
 	};
 
+	const queryClient = useQueryClient();
+
 	function handleClick() {
+		queryClient.invalidateQueries({
+			queryKey: ['finance-accounts', 'finance-transaction-group', 'finance-metadata']
+		});
 		authStore.logout();
 		goto('/');
 	}

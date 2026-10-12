@@ -43,3 +43,24 @@ export interface TransactionGroupUpdate {
 	name?: string;
 	description?: string;
 }
+
+export type TransactionType = 'income' | 'expense' | 'transfer';
+export type PaymentMode = 'cash' | 'upi' | 'net_banking' | 'credit_card_direct';
+
+export interface TransactionBase {
+	account_id: number;
+	to_account?: number;
+	group_id?: number;
+	title: string;
+	transaction_time: Date;
+	amount: number;
+	type: TransactionType;
+	payment_mode: PaymentMode;
+	description: string;
+	vendor?: string;
+	category: string;
+}
+
+export interface Transaction extends TransactionBase {
+	id: number;
+}
