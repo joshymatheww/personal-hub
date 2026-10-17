@@ -1,4 +1,5 @@
 from datetime import UTC, datetime
+from decimal import Decimal
 from enum import Enum
 
 from sqlalchemy import DateTime, ForeignKey, Numeric, String
@@ -34,12 +35,18 @@ class Account(Base):
     )
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     type: Mapped[AccountType] = mapped_column(String, nullable=False)
-    balance: Mapped[float] = mapped_column(
-        Numeric(precision=12, scale=2), default=0.00, nullable=False
+    balance: Mapped[Decimal] = mapped_column(
+        Numeric(precision=12, scale=2), default=Decimal("0.00"), nullable=False
     )
 
     transactions: Mapped[list["Transactions"]] = relationship(
-        back_populates="account", cascade="all, delete-orphan"
+        back_populates="account",
+        cascade="all, delete-orphan",
+        foreign_keys="[Transactions.account_id]",
+    )
+
+    incoming_transfers: Mapped[list["Transactions"]] = relationship(
+        back_populates="destination_account", foreign_keys="[Transactions.to_account]"
     )
 
 
@@ -72,14 +79,27 @@ class Transactions(Base):
     transaction_time: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC), index=True
     )
-    amount: Mapped[float] = mapped_column(
-        Numeric(precision=10, scale=2), nullable=False
+    amount: Mapped[Decimal] = mapped_column(
+        Numeric(precision=10, scale=2), default=Decimal("0.00"), nullable=False
     )
     type: Mapped[TransactionType] = mapped_column(String, nullable=False)
     category: Mapped[str] = mapped_column(String(50), nullable=False, index=True)
     payment_mode: Mapped[PaymentMode] = mapped_column(String, nullable=False)
     description: Mapped[str | None] = mapped_column(String(255), nullable=True)
     vendor: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    to_account: Mapped[int | None] = mapped_column(
+        ForeignKey(
+            "accounts.id",
+            ondelete="CASCADE",
+            name="fk_transactions_to_account_accounts",
+        ),
+        nullable=True,
+    )
 
-    account: Mapped["Account"] = relationship(back_populates="transactions")
+    account: Mapped["Account"] = relationship(
+        back_populates="transactions", foreign_keys=[account_id]
+    )
+    destination_account: Mapped["Account | None"] = relationship(
+        back_populates="incoming_transfers", foreign_keys=[to_account]
+    )
     group: Mapped["TransactionGroup"] = relationship(back_populates="transactions")

@@ -17,7 +17,9 @@ async def lifespan(_app: FastAPI):
     await engine.dispose()
 
 
-app = FastAPI(title="Personal Dashboard API")
+app = FastAPI(
+    title="Personal Dashboard API",
+)
 
 app.add_middleware(
     CORSMiddleware,

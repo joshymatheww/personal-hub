@@ -44,14 +44,14 @@ CORE_CATEGORIES = {
 }
 
 
-router.include_router(account.router, prefix="/accounts", tags=["Accounts", "Finance"])
+router.include_router(account.router, prefix="/accounts", tags=["Finance: Accounts"])
 router.include_router(
     transaction_group.router,
     prefix="/transaction-group",
-    tags=["Transactions Group", "Finance"],
+    tags=["Finance: Transaction Groups"],
 )
 router.include_router(
-    transaction.router, prefix="/transactions", tags=["Transactions", "Finance"]
+    transaction.router, prefix="/transactions", tags=["Finance: Transactions"]
 )
 
 
