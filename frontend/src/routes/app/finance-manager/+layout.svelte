@@ -6,6 +6,7 @@
 	import { authStore } from '$lib/stores/auth-store.svelte';
 	import { setAccountState } from '$lib/stores/finance-manager/accounts-store.svelte';
 	import { setTransactionGroupState } from '$lib/stores/finance-manager/transaction-group-store.svelte';
+	import { setTransactionState } from '$lib/stores/finance-manager/transactions-store';
 	import { format } from 'date-fns';
 	import { onMount } from 'svelte';
 
@@ -15,6 +16,7 @@
 
 	setAccountState();
 	setTransactionGroupState();
+	setTransactionState();
 
 	function handleWindowResize() {
 		if (sectionRef) {
